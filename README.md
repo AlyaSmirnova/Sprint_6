@@ -64,7 +64,7 @@ Sprint_6/
 > ```bash 
 > git clone https://github.com/AlyaSmirnova/Sprint_6.git
 > cd Sprint_6
-📦 Репозиторий проекта: [Sprint_5](https://github.com/AlyaSmirnova/Sprint_6)
+📦 Репозиторий проекта: [Sprint_6](https://github.com/AlyaSmirnova/Sprint_6)
 
 2. **Установка зависимостей**
 > `$ pip install -r requirements.txt`
