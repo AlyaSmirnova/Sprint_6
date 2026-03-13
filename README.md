@@ -1,7 +1,7 @@
 # 📚 Scooter Service: UI Automation Franework (POM)
 
 
-![CI/CD Status](https://github.com/AlyaSmirnova/Sprint_6/actions/workflows/ui-tests.yml/badge.svg)
+![CI/CD Status](https://github.com/AlyaSmirnova/Sprint_6/actions/workflows/ui-tests.yml/badge.svg?branch=main)
 [![Python Version](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org)
 [![Selenium](https://img.shields.io/badge/Tested%20with-Selenium-green?logo=selenium\&logoColor=white)](https://www.selenium.dev)
 [![Reports](https://img.shields.io/badge/Reports-Allure-orange?logo=allure)](https://github.com/AlyaSmirnova/Sprint_6)
