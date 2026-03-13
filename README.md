@@ -1,70 +1,118 @@
-# 📚 Спринт 6: UI-тесты в формате Page Object Model для сервиса [Яндекс.Самокат](https://qa-scooter.praktikum-services.ru).
+# 📚 Scooter Service: UI Automation Franework (POM)
 
-Автотесты для проверки сервиса [Яндекс.Самокат](https://qa-scooter.praktikum-services.ru). Это приложение для аренды самоката. 
 
-## ✅ Оглавление
-1. Описание
-2. Технологии
-3. Структура проекта
-4. Тестирование
-5. Запуск автотестов
+![CI/CD Status](https://github.com/AlyaSmirnova/Sprint_6/actions/workflows/ui-tests.yml/badge.svg)
+[![Python Version](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org)
+[![Selenium](https://img.shields.io/badge/Tested%20with-Selenium-green?logo=selenium\&logoColor=white)](https://www.selenium.dev)
+[![Reports](https://img.shields.io/badge/Reports-Allure-orange?logo=allure)](https://github.com/AlyaSmirnova/Sprint_6)
 
-## 💫 Описание
+## ✅ Table of Contents
+1. [Description](#-description)
+2. [Tech Stack & Tools](#-tech-stack-&-tools)
+3. [Project Architecture (POM)](#-project-architecture-pom)
+4. [Allure Reporting Features](#-allure-reporting-features)
+5. [Test Coverage](#-test-coverage)
+6. [Execution Guide](#-execution-guide)
+7. [Reporting](#-reporting)
 
-Этот проект состоит из автотестов для проверки UI различных элементов приложения **Яндекс.Самокат**, включая: 
+## 💫 Description
 
-- тестирование выпадающего списка в разделе "Вопросы о важном" (при клике на вопрос выпадает соответствующий ответ);
-- тестирование всего флоу позитивного сценария заказа самоката с 2-мя наборами данных;
-- тестирование редиректа на главную страницу сервиса Яндекс.Самокат при клике на слово "Самокат" в лого;
-- тестирование редиректа на главную страницу Дзена при клике на слово "Яндекс" в лого.
+This project is an automated UI testing framework for the **Yandex Scooter** (Samokat) service. 
+The implementation is based on the **Page Object Model (POM)** pattern, which ensures separation between test logic and page structure, resulting in clean, scalable and maintainable code.
 
-## 🧑‍💻 Технологии
-- Python 3.10+
-- [Pytest](https://docs.pytest.org/)
-- [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/)
-- [Firefox](https://www.mozilla.org/ru/firefox/new/)
-- [Allure](https://docs.qameta.io/allure/)
+## 🧑‍💻 Tech Stack & Tools
+- **Language:** Python 3.10+
+- **Framework:** [Pytest](https://docs.pytest.org)
+- **Architecture:** Page Object Model (POM)
+- **Browser Automation:** [Selenium WebDriver](https://www.selenium.dev) (Firefox/Chrome)
+- **Reporting:** Allure Framework
+- **CI/CD:** GitHub Actions
 
-## 📁 Структура проекта
+## 📁 Project Architecture (POM)
 ```text
-Sprint_6/
-    ├── pages/                 # Page Object модели страниц
-    │   ├── base_page.py
-    │   ├── faq_page.py
-    │   ├── main_page.py
-    │   ├── order_page.py
+
+    ├── .github/workflows/     # CI/CD pipeline configuration 
+    ├── allure-results/        # Raw test execution data (generated after run)
+    ├── pages/                 # Page Object models
+    │   ├── base_page.py       # Core methods (waits, clicks, scrolls)
+    │   ├── faq_page.py        # FAQ section methods
+    │   ├── main_page.py       # Landing page elements and actions
+    │   ├── order_page.py      # Order form flow
     │ 
-    ├── src                    # Вспомогательные модули
-    │   ├── config.py       
-    │   ├── locators.py
+    ├── src                    # Support modules
+    │   ├── config.py          # Base URL
+    │   ├── locators.py        # Web element selectors (organized by page)
     │ 
-    ├── tests/                 # Тестовые сценарии
+    ├── tests/                 # Test scenarios (logic only)
     │   ├── test_faq_page.py
     │   ├── test_order_buttons.py
     │   ├── test_order_page.py
     │   ├── test_scooter_logo.py
     │   ├── test_yandex_logo.py    
     │   
-    ├── conftest.py              # Файл с фикстурами
-    └── requirements.txt         # Файл с зависимостями для проекта
+    ├── conftest.py              # Fixtures (driver initialization)
+    ├── pytest.ini               # Pytest configuration & Allure flags
+    ├── requirements.txt         # Project dependencies
+    └── README.md                # Comprehensive project documentation
 ```
-## 🧪 Тестирование
-Все тесты написаны с использованием [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/) и [Pytest](https://docs.pytest.org/). Тесты проверяют следующие функциональности и элементы: 
-1. Проверка соответствия вопроса в разделе "Вопросы о важном" выпадающему ответу; 
-2. Проверку позитивного сценария заказа самоката с 2-мя наборами данных; 
-3. Проверку через 2 точки входа в позитивный сценарий заказа самоката: кнопка "Заказать" вверху страницы и кнопка "Заказать" внизу страницы; 
-4. Проверку корректного заполнения формы заказа; 
-5. Проверку появления всплывающего окна с сообщением об успешном создании заказа; 
-6. Проверку перехода на главную страницу Яндекс.Самоката при клике на слово "Самокат" в логотипе; 
-7. Проверку перехода на главную страницу Дзена при клике на слово "Яндекс" в логотипе.
 
-## ⚙️ Запуск автотестов
+## 📊 Allure Reporting Features
+The project is integrated with the **Allure Framework** to provide deep visibility into the UI automation process. Key features include:
 
-1. **Клонирование репозитория**
+*   **Visual Evidence:** Automated **browser screenshots** are captured and attached to the report for every failed test, enabling rapid debugging.
+*   **Dynamic Test Documentation:** Uses `@allure.title` and `@allure.description` to transform technical code into readable test scenarios.
+*   **Hierarchical Grouping:** Tests are organized by **Suites** (e.g., Authentication) and **Features** (e.g., Login Logic) for structured analysis.
+*   **Step-by-Step Execution:** Detailed `@allure.step` logging tracks every user action, such as clicking buttons or filling forms, in real-time.
+
+## 🧪 Test Coverage
+### 1. FAQ & Information
+* **Accordion Logic:** Verification that clicking each question in the "Questions about Important Things" section expands the correct corresponding answer.
+* **Data Consistency:** Parameterized tests to ensure all 8 FAQ items display accurate information.
+
+### 2. Order Journey (E2E)
+* **Entry Points:** Verification of the positive order flow via two different entry points:
+    *   The "Order" button in the page **Header**.
+    *   The "Order" button located in the **Footer** section.
+* **Multi-dataset Testing:** Full checkout flow validation using multiple sets of user data (First name, Last name, Address, Metro station, Phone).
+* **Order Confirmation:** Verification of the "Order Successful" modal appearance after form submission.
+
+### 3. Navigation & Branding
+* **Internal Navigation:** Redirection to the Scooter service main page when clicking the **"Scooter" logo**.
+* **External Redirection:** Redirection to the **Dzen** (Yandex) main page in a new browser tab when clicking the **"Yandex" logo**.
+
+### 4. Technical Implementation
+* **Base Page Pattern:** Usage of centralized methods for clicking, waiting, and scrolling to elements.
+* **Smart Waits:** Implementation of `WebDriverWait` and `expected_conditions` to handle dynamic page loading and animations.
+* **Parameterized Tests:** Efficient execution of repetitive scenarios using `@pytest.mark.parametrize`.
+
+## ⚙️ Execution Guide
+
+### 1. Environment Setup
+Clone the repository and set up a local virtual environment to ensure dependency isolation:
+
+1. **Clone repository**
 > ```bash 
-> git clone https://github.com/AlyaSmirnova/Sprint_6.git
+> git clone https://github.com/AlyaSmirnova/Sprint_6
 > cd Sprint_6
-📦 Репозиторий проекта: [Sprint_6](https://github.com/AlyaSmirnova/Sprint_6)
+📦 Repository: [Sprint_5](https://github.com/AlyaSmirnova/Sprint_6)
 
-2. **Установка зависимостей**
+2. **Create a virtual environment**
+> ```bash 
+> python -m venv venv
+
+3. **Activate the virtual environment**
+> ```bash 
+> source venv/bin/activate
+
+4. **Install required dependencies**
 > `$ pip install -r requirements.txt`
+
+### 2. Running Tests
+Execute the full test suite and collect raw data for the Allure report:
+> ```bash 
+> pytest -v --alluredir=allure-results
+
+### 3. Generatig Allure Report
+Transform the raw data into a visual, interactive HTML report:
+> ```bash 
+> allure serve allure-results

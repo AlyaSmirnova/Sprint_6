@@ -4,11 +4,21 @@ from selenium.webdriver.support import expected_conditions as EC
 import allure
 
 
-@allure.feature("Тестирование перехода на страницу Яндекс.Дзен")
-def test_yandex_logo_redirects_to_dzen(driver):
-    with allure.step("Проверить переход на страницу Яндекс.Дзен при нажатии на лого яндекса"):
+@allure.feature("Logo Navigation")
+class TestLogoNavigation:
+
+    @allure.title('Redirect to Yandex Dzen via "Yandex" Logo')
+    @allure.description('Verify that clicking the "Yandex" logo opens the Dzen page in a new tab')
+    def test_yandex_logo_redirects_to_dzen(self, driver):
         main_page = MainPage(driver)
-        main_page.navigate()
-        main_page.click_yandex_logo()
-        WebDriverWait(driver, timeout=15).until(EC.url_contains("dzen.ru"))
-        assert "dzen.ru" in main_page.get_current_url()
+        with allure.step('Step 1: Open the application'):
+            main_page.navigate()
+        with allure.step('Step 2: Click on the "Yandex" logo'):
+            main_page.click_yandex_logo()
+        with allure.step('Step 3: Switch to the newly opened browser tab'):
+            WebDriverWait(driver, 10).until(lambda d: len(d.window_handles) > 1)
+            new_window = driver.window_handles[1]
+            driver.switch_to.window(new_window)
+            WebDriverWait(driver, 15).until(EC.url_contains("dzen.ru"))
+        with allure.step('Step 4: Verify redirection to Dzen.ru'):
+            assert "dzen.ru" in main_page.get_current_url(), f'Expected Dzen URL, but got: {current_url}'

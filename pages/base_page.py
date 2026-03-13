@@ -6,41 +6,43 @@ from src.locators import OrderPageLocators
 
 
 class BasePage:
+
     def __init__(self, driver):
         self.driver = driver
 
+    @allure.step('Navigate to the base URL')
     def navigate(self):
-        with allure.step('Открыть главную страницу'):
+        with allure.step(f'Opening URL: {Config.URL}'):
             self.driver.get(Config.URL)
 
+    @allure.step('Wait for element visibility: {locator}')
     def wait_for_element(self, locator, timeout=15):
-        with allure.step(f'Дождаться появления элемента {locator}'):
-            return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator), message = f'Element {locator} not found within {timeout} seconds')
 
+    @allure.step('Scroll to element: {locator}')
     def scroll_to_element(self, locator):
-        with allure.step(f'Проскроллить к элементу {locator}'):
-            element = self.wait_for_element(locator)
-            self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        element = self.wait_for_element(locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
+    @allure.step('Click on element: {locator}')
     def click_element(self, locator):
-        with allure.step(f'Кликнуть на элемент {locator}'):
-            self.wait_for_element(locator).click()
+        self.wait_for_element(locator).click()
 
+    @allure.step('Retrieve text from element: {locator}')
     def get_element_text(self, locator):
-        with allure.step(f'Получить текст элемента {locator}'):
-            element = self.wait_for_element(locator)
-            return element.text
+        element = self.wait_for_element(locator)
+        return element.text
 
+    @allure.step('Input text "{keys}" into field: {locator}')
     def input_text(self, locator, keys):
-        with allure.step(f'Ввести текст{keys} в поле {locator}'):
-            self.wait_for_element(locator).send_keys(keys)
+        self.wait_for_element(locator).send_keys(keys)
 
+    @allure.step('Select option "{option_text}" from dropdown {dropdown_locator}')
     def select_dropdown_option(self, dropdown_locator, option_text):
-        with allure.step("Выбрать из выпадающего списка"):
-            self.click_element(dropdown_locator)
-            option_locator = (OrderPageLocators.RENTAL_OPTION[0], OrderPageLocators.RENTAL_OPTION[1].format(option_text))
-            self.click_element(option_locator)
+        self.click_element(dropdown_locator)
+        option_locator = (OrderPageLocators.RENTAL_OPTION[0], OrderPageLocators.RENTAL_OPTION[1].format(option_text))
+        self.click_element(option_locator)
 
+    @allure.step('Get current page URL')
     def get_current_url(self):
-        with allure.step("Получить текущий адрес сайта"):
-            return self.driver.current_url
+        return self.driver.current_url
