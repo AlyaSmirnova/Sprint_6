@@ -1,7 +1,7 @@
 # 📚 Scooter Service: UI Automation Franework (POM)
 
 
-![CI/CD Status](https://github.com/AlyaSmirnova/Sprint_6/actions/workflows/ui-tests.yml/badge.svg)
+![CI/CD Status](https://github.com/AlyaSmirnova/Sprint_6/actions/workflows/ui-tests.yml/badge.svg?branch=main)
 [![Python Version](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org)
 [![Selenium](https://img.shields.io/badge/Tested%20with-Selenium-green?logo=selenium\&logoColor=white)](https://www.selenium.dev)
 [![Reports](https://img.shields.io/badge/Reports-Allure-orange?logo=allure)](https://github.com/AlyaSmirnova/Sprint_6)
@@ -13,7 +13,7 @@
 4. [Allure Reporting Features](#-allure-reporting-features)
 5. [Test Coverage](#-test-coverage)
 6. [Execution Guide](#-execution-guide)
-7. [Reporting](#-reporting)
+7. [CI/CD Workflow](#-cicd-workflow)
 
 ## 💫 Description
 
@@ -116,3 +116,13 @@ Execute the full test suite and collect raw data for the Allure report:
 Transform the raw data into a visual, interactive HTML report:
 > ```bash 
 > allure serve allure-results
+
+## ⚙️ CI/CD Workflow
+The project is fully automated using **GitHub Actions**. Upon every `push` to the **main** branch or any `Pull Request` creation:
+
+1.  **Environment Provisioning:** A clean **Ubuntu** runner is initialized in the cloud environment.
+2.  **Browser Setup:** The latest **Firefox** (or Chrome) and its corresponding **WebDriver** are automatically installed and configured.
+3.  **Dependency Management:** The Python environment is set up, and all required libraries (`Selenium`, `Pytest`, `Allure`) are installed from `requirements.txt`.
+4.  **Headless Execution:** The full UI test suite is executed in **headless mode** to ensure stability and performance in the server environment without a GUI.
+5.  **Artifact Generation:** Test results, including logs and metadata, are collected and prepared for the **Allure report**.
+6.  **Auto-Deployment:** (Optional) The final Allure report is automatically published to **GitHub Pages** for easy viewing.
