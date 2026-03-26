@@ -59,7 +59,6 @@ The implementation is based on the **Page Object Model (POM)** pattern, which en
 ## 📊 Allure Reporting Features
 The project is integrated with the **Allure Framework** to provide deep visibility into the UI automation process. Key features include:
 
-*   **Visual Evidence:** Automated **browser screenshots** are captured and attached to the report for every failed test, enabling rapid debugging.
 *   **Dynamic Test Documentation:** Uses `@allure.title` and `@allure.description` to transform technical code into readable test scenarios.
 *   **Hierarchical Grouping:** Tests are organized by **Suites** (e.g., Authentication) and **Features** (e.g., Login Logic) for structured analysis.
 *   **Step-by-Step Execution:** Detailed `@allure.step` logging tracks every user action, such as clicking buttons or filling forms, in real-time.
@@ -69,7 +68,7 @@ The project is integrated with the **Allure Framework** to provide deep visibili
 * **Accordion Logic:** Verification that clicking each question in the "Questions about Important Things" section expands the correct corresponding answer.
 * **Data Consistency:** Parameterized tests to ensure all 8 FAQ items display accurate information.
 
-### 2. Order Journey (E2E)
+### 2. Order Path (E2E)
 * **Entry Points:** Verification of the positive order flow via two different entry points:
     *   The "Order" button in the page **Header**.
     *   The "Order" button located in the **Footer** section.
@@ -81,7 +80,7 @@ The project is integrated with the **Allure Framework** to provide deep visibili
 * **External Redirection:** Redirection to the **Dzen** (Yandex) main page in a new browser tab when clicking the **"Yandex" logo**.
 
 ### 4. Technical Implementation
-* **Base Page Pattern:** Usage of centralized methods for clicking, waiting, and scrolling to elements.
+* **Base Page Pattern:** Usage of centralized methods for clicking, waiting and scrolling to elements.
 * **Smart Waits:** Implementation of `WebDriverWait` and `expected_conditions` to handle dynamic page loading and animations.
 * **Parameterized Tests:** Efficient execution of repetitive scenarios using `@pytest.mark.parametrize`.
 
@@ -125,5 +124,4 @@ The project is fully automated using **GitHub Actions**. Upon every `push` to th
 3.  **Dependency Management:** The Python environment is set up, and all required libraries (`Selenium`, `Pytest`, `Allure`) are installed from `requirements.txt`.
 4.  **Headless Execution:** The full UI test suite is executed in **headless mode** to ensure stability and performance in the server environment without a GUI.
 5.  **Artifact Generation:** Test results, including logs and metadata, are collected and prepared for the **Allure report**.
-6.  **Auto-Deployment:** (Optional) The final Allure report is automatically published to **GitHub Pages** for easy viewing.
 
