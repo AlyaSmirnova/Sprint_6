@@ -1,4 +1,4 @@
-# 📚 Scooter Service: UI Automation Franework (POM)
+# 📚 Scooter Service: UI Automation Framework (POM)
 
 
 ![CI/CD Status](https://github.com/AlyaSmirnova/Sprint_6/actions/workflows/ui-tests.yml/badge.svg?branch=main)
